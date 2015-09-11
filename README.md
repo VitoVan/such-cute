@@ -22,9 +22,9 @@ sbcl --load server.lisp
 
 [http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"]](http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"])
 
-http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href as uri","text as title"]
+[http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href as uri","text as title"]](http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href as uri","text as title"])
 
-http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]
+[http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]](http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}])
 
 Since it returns JSON sometime, you may like to open your Developer Panel of your browser.
 
