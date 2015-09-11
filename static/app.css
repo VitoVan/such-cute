@@ -1,0 +1,16 @@
+body{
+    font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",sans-serif;
+    color: #000;
+    background: #FFF none repeat scroll 0% 0%;
+    font-size: 1em;
+    line-height: 1.4;
+    clear: both;
+    max-width: 59em;
+    margin: 0px auto;
+}
+.en{
+    font-family: Georgia,"Times New Roman","DejaVu Serif",serif !important;
+}
+.container{
+    
+}

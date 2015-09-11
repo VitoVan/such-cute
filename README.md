@@ -1,2 +1,2 @@
 # such-cute
-Web GUI for cl-spider
+Web Interface for cl-spider

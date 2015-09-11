@@ -23,7 +23,7 @@
                                   (kv
                                    (kv "uri" uri)
                                    ($>= "time" (- (get-universal-time) (* 60 2))))))))
-      (let* ((html (get-what-i-want uri)))
+      (let* ((html (get-data uri)))
         (progn (cache-uri uri html) html))))
 
 ;; Start Hunchentoot
@@ -41,7 +41,7 @@
 
 (defun controller-verydoge-test()
   (if (and (parameter "uri") (parameter "selector") (parameter "desires"))
-      (let* ((result (get-all-i-want
+      (let* ((result (get-block-data
                       (parameter "uri")
                       :selector (parameter "selector")
                       :desires (and (parameter "desires") (decode-json-from-string (parameter "desires"))))))
@@ -60,7 +60,7 @@
 ;;suchcute.vito/verydoge/test?uri=http://v2ex.com/&selector=div.cell.item&desires=[{"selector":"img","attrs":["src as avatar"]},{"selector":"a[href^='/t']","attrs":["href as uri","text as title"]},{"selector":"a.node","attrs":["href as node-uri","text as node-title"]}]
 
 (defun controller-doge-test()
-  (let* ((result (get-what-i-want
+  (let* ((result (get-data
                   (parameter "uri")
                   :selector (parameter "selector")
                   :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
