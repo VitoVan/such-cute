@@ -8,6 +8,8 @@
 
 ;;init db
 (db.use "such-cute")
+;;Cache time in seconds
+(defvar cache-delay (* 60 2))
 
 (defun cache-uri(uri html)
   (db.update
@@ -22,7 +24,7 @@
                          (db.find "cache"
                                   (kv
                                    (kv "uri" uri)
-                                   ($>= "time" (- (get-universal-time) (* 60 2))))))))
+                                   ($>= "time" (- (get-universal-time) cache-delay)))))))
       (let* ((html (get-data uri)))
         (progn (cache-uri uri html) html))))
 
@@ -39,7 +41,7 @@
   (start *acceptor*)
   (format t "Server started at 5000"))
 
-(defun controller-verydoge-test()
+(defun controller-get-block()
   (if (and (parameter "uri") (parameter "selector") (parameter "desires"))
       (let* ((result (get-block-data
                       (parameter "uri")
@@ -55,11 +57,7 @@
                (encode-json-to-string result)))))
       "not much params: uri / selector / desires"))
 
-;;http://suchcute.vito/verydoge/test?uri=http://v2ex.com/&selector=div.cell.item&desires=[{"selector":"img","attrs":["src"]}]
-;;http://suchcute.vito/verydoge/test?uri=http://v2ex.com/&selector=div.cell.item&desires=[{"selector":"img","attrs":["src"]},{"selector":"a[href^='/t']","attrs":["href","text"]}]
-;;suchcute.vito/verydoge/test?uri=http://v2ex.com/&selector=div.cell.item&desires=[{"selector":"img","attrs":["src as avatar"]},{"selector":"a[href^='/t']","attrs":["href as uri","text as title"]},{"selector":"a.node","attrs":["href as node-uri","text as node-title"]}]
-
-(defun controller-doge-test()
+(defun controller-get()
   (let* ((result (get-data
                   (parameter "uri")
                   :selector (parameter "selector")
@@ -78,14 +76,9 @@
            (setf (hunchentoot:content-type*) "application/json")
            (encode-json-to-string result))))))
 
-;;http://suchcute.vito/doge/test?uri=http://v2ex.com/
-;;http://suchcute.vito/doge/test?uri=http://v2ex.com/&selector=span.item_title
-;;http://suchcute.vito/doge/test?uri=http://v2ex.com/&selector=span.item_title>a&attrs=["href","text"]
-;;http://suchcute.vito/doge/test?uri=http://v2ex.com/&selector=span.item_title>a&attrs=["href","text"]&callback=console.log
-
 (setf *dispatch-table*
       (list
-       (create-regex-dispatcher "^/verydoge/test$" 'controller-verydoge-test)
-       (create-regex-dispatcher "^/doge/test$" 'controller-doge-test)))
+       (create-regex-dispatcher "^/get-block$" 'controller-get-block)
+       (create-regex-dispatcher "^/get$" 'controller-get)))
 
 (start-server)
