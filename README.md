@@ -11,6 +11,7 @@ Web Interface for cl-spider
 
 ```bash
 wget https://raw.githubusercontent.com/VitoVan/such-cute/master/server.lisp
+mkdir log
 sbcl --load server.lisp
 ```
 
