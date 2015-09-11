@@ -16,7 +16,7 @@ sbcl --load server.lisp
 
 * Ok, now have fun:
 
-http://localhost:5000/get?uri=https://news.ycombinator.com/
+[http://localhost:5000/get?uri=https://news.ycombinator.com/](http://localhost:5000/get?uri=https://news.ycombinator.com/)
 
 http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a
 
