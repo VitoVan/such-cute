@@ -43,38 +43,48 @@
 
 (defun controller-get-block()
   (if (and (parameter "uri") (parameter "selector") (parameter "desires"))
-      (let* ((result (get-block-data
-                      (parameter "uri")
-                      :selector (parameter "selector")
-                      :desires (and (parameter "desires") (decode-json-from-string (parameter "desires"))))))
-        (cond
-          ((parameter "callback")
-           (progn
-             (setf (hunchentoot:content-type*) "application/javascript")
-             (concatenate 'string (parameter "callback") "(" (encode-json-to-string result) ");")))
-          (t (progn
-               (setf (hunchentoot:content-type*) "application/json")
-               (encode-json-to-string result)))))
+      (handler-case
+          (let* ((result (get-block-data
+                          (parameter "uri")
+                          :selector (parameter "selector")
+                          :desires (and (parameter "desires") (decode-json-from-string (parameter "desires"))))))
+            (cond
+              ((parameter "callback")
+               (progn
+                 (setf (hunchentoot:content-type*) "application/javascript")
+                 (concatenate 'string (parameter "callback") "(" (encode-json-to-string result) ");")))
+              (t (progn
+                   (setf (hunchentoot:content-type*) "application/json")
+                   (encode-json-to-string result)))))
+        (error
+            (condition)
+          (format nil "~A" condition)))
       "need more params: uri / selector / desires"))
 
 (defun controller-get()
-  (let* ((result (get-data
-                  (parameter "uri")
-                  :selector (parameter "selector")
-                  :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
-                  :html (get-cache (parameter "uri")))))
-    (cond
-      ((null (parameter "selector"))
-       (progn
-         (setf (hunchentoot:content-type*) "text/plain")
-         result))
-      ((parameter "callback")
-       (progn
-         (setf (hunchentoot:content-type*) "application/javascript")
-         (concatenate 'string (parameter "callback") "(" (encode-json-to-string result) ");")))
-      (t (progn
-           (setf (hunchentoot:content-type*) "application/json")
-           (encode-json-to-string result))))))
+  (if (null (parameter "uri"))
+      "Sorry sir, you must give me the uri."
+      (handler-case
+          (let* ((result (get-data
+                          (parameter "uri")
+                          :selector (parameter "selector")
+                          :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
+                          :html (get-cache (parameter "uri")))))
+            (cond
+              ((null (parameter "selector"))
+               (progn
+                 (setf (hunchentoot:content-type*) "text/plain")
+                 (format nil "~A" result)))
+              ((parameter "callback")
+               (progn
+                 (setf (hunchentoot:content-type*) "application/javascript")
+                 (concatenate 'string (parameter "callback") "(" (encode-json-to-string result) ");")))
+              (t (progn
+                   (setf (hunchentoot:content-type*) "application/json")
+                   (encode-json-to-string result)))))
+        (error
+            (condition)
+          (format nil "~A" condition)))))
 
 (setf *dispatch-table*
       (list
