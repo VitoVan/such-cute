@@ -18,9 +18,9 @@ sbcl --load server.lisp
 
 [http://localhost:5000/get?uri=https://news.ycombinator.com/](http://localhost:5000/get?uri=https://news.ycombinator.com/)
 
-http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a
+[http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a](http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a)
 
-http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"]
+[http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"]](http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"])
 
 http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href as uri","text as title"]
 
