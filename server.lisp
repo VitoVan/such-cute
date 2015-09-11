@@ -55,7 +55,7 @@
           (t (progn
                (setf (hunchentoot:content-type*) "application/json")
                (encode-json-to-string result)))))
-      "not much params: uri / selector / desires"))
+      "need more params: uri / selector / desires"))
 
 (defun controller-get()
   (let* ((result (get-data

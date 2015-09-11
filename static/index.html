@@ -11,7 +11,37 @@
   </head>
   <body>
     <div class="container en">
-      <h1>Such Cute</h1>
+      <h1>Such-Cute</h1>
+      <p><b>* Translate Web Page to JSON</b></p>
+      <p>Based on <a href="https://github.com/VitoVan/cl-spider">cl-spider</a> and <a href="https://github.com/VitoVan/such-cute">such-cute</a>, and you may like to read this article: <a href="http://vitovan.com/webspider.html">Web Spider</a>.</p>
+      <hr>
+      <h2>Usage:</h2>
+      <p><b>******** get ********</b></p>
+      <p>- Get html dom from uri, find the nodes by selector, grab the data of attributes you want, convert them to JSON.</p>
+      <p>Uri: <b>http://sc.vitovan.vito/get</b></p>
+      <p>Params:
+        <ul>
+          <li>uri --- the uri. Example: <i>https://news.ycombinator.com/</i></li>
+          <li>selector --- the css selector. Example: <i>a</i> or <i>tr.athing</i>, see <a href="http://www.w3schools.com/cssref/css_selectors.asp">CSS Selector Reference</a></li>
+          <li>attrs --- the attributes you want, it should be a list in JSON format, and attrubutes can has alias. Example: <i>["text","href"]</i> or <i>["text as title","href as uri"]</i></li>
+        </ul>
+      </p>
+      <p>Example:</p>
+      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text","href"]</i></p>
+      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]</i></p>
+
+      <p><b>******** get-block ********</b></p>
+      <p>- Get html dom from uri, find the block nodes by selector, then find the sub nodes by your desires, and grab the data of their attributes as you want, convert them to JSON.</p>
+      <p>Uri: <b>http://sc.vitovan.com/get-block</b></p>
+      <p>Params:
+        <ul>
+          <li>uri --- the uri. Example: <i>https://news.ycombinator.com/</i></li>
+          <li>selector --- the block css selector. Example: <i>a</i> or <i>tr.athing</i>, see <a href="http://www.w3schools.com/cssref/css_selectors.asp">CSS Selector Reference</a></li>
+          <li>desires --- the sub selectors and attributes you want, one desire = one selector + some attributes, it should be a JSON list. Example: <i>[{"selector":"td.title>a","attrs":["href","text"]}]</i> or <br><i>[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]</i></li>
+        </ul>
+      </p>
+      <p>Example:</p>
+      <p><i>http://sc.vitovan.com/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]</i></p>
     </div>
   </body>
 </html>

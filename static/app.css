@@ -14,3 +14,8 @@ body{
 .container{
     
 }
+i{
+    background-color: #DDD;
+    padding: 0 0.5em;
+    border-radius: 1em;
+}
