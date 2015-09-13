@@ -1,5 +1,5 @@
 # such-cute
-Web Interface for cl-spider
+**Translate Web Page to JSON (Web Interface for [cl-spider](https://github.com/VitoVan/cl-spider#installlation) )**
 
 ## Installation
 
