@@ -52,7 +52,7 @@
   (if (and (parameter "uri") (parameter "selector") (parameter "desires"))
       (handler-case
           (let* ((result (get-block-data
-                          (parameter (local-uri-transfer "uri"))
+                          (local-uri-transfer (parameter "uri"))
                           :selector (parameter "selector")
                           :desires (and (parameter "desires") (decode-json-from-string (parameter "desires"))))))
             (cond
@@ -73,7 +73,7 @@
       "Sorry sir, you must give me the uri."
       (handler-case
           (let* ((result (get-data
-                          (parameter (local-uri-transfer "uri"))
+                          (local-uri-transfer (parameter "uri"))
                           :selector (parameter "selector")
                           :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
                           :html (get-cache (parameter "uri")))))
