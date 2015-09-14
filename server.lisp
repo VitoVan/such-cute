@@ -76,7 +76,7 @@
                           (local-uri-transfer (parameter "uri"))
                           :selector (parameter "selector")
                           :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
-                          :html (get-cache (parameter "uri")))))
+                          :html (get-cache (local-uri-transfer (parameter "uri"))))))
             (cond
               ((null (parameter "selector"))
                (progn
