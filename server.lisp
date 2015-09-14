@@ -41,11 +41,18 @@
   (start *acceptor*)
   (format t "Server started at 5000"))
 
+(defun local-uri-transfer(uri)
+  (let* ((uri-obj (puri:parse-uri uri))
+         (uri-host (string-downcase (puri:uri-host uri-obj))))
+    (if (or (equal "127.0.0.1" uri-host) (equal "localhost" uri-host))
+        "http://www.example.com"
+        uri)))
+
 (defun controller-get-block()
   (if (and (parameter "uri") (parameter "selector") (parameter "desires"))
       (handler-case
           (let* ((result (get-block-data
-                          (parameter "uri")
+                          (parameter (local-uri-transfer "uri"))
                           :selector (parameter "selector")
                           :desires (and (parameter "desires") (decode-json-from-string (parameter "desires"))))))
             (cond
@@ -66,7 +73,7 @@
       "Sorry sir, you must give me the uri."
       (handler-case
           (let* ((result (get-data
-                          (parameter "uri")
+                          (parameter (local-uri-transfer "uri"))
                           :selector (parameter "selector")
                           :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
                           :html (get-cache (parameter "uri")))))
