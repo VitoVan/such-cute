@@ -92,6 +92,10 @@
                           :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
                           :html (get-cache (filt-uri (parameter "uri")) (assemble-params (parameter "params"))))))
             (cond
+              ((and (null (parameter "selector")) (null (parameter "attrs")))
+               (progn
+                 (setf (hunchentoot:content-type*) "application/octet-stream")
+                 (format nil "~A" result)))
               ((null (parameter "selector"))
                (progn
                  (setf (hunchentoot:content-type*) "text/plain")
