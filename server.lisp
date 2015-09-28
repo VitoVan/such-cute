@@ -11,24 +11,25 @@
 ;;Cache time in seconds
 (defvar cache-delay (* 60 2))
 
-(defun cache-uri(uri html)
+(defun cache-uri(uri params html)
   (db.update
    "cache"
-   ($ "uri" uri)
+   (kv ($ "uri" uri) ($ "params" params))
    (kv ($set "time" (get-universal-time)) ($set "html" html))
    :upsert t :multi t))
 
-(defun get-cache(uri)
+(defun get-cache(uri params)
   (or (get-element "html"
                    (car (docs
                          (db.find "cache"
                                   (kv
                                    (kv "uri" uri)
+                                   (kv "params" (write-to-string params))
                                    ($>= "time" (- (get-universal-time) cache-delay)))))))
-      (let* ((html (get-data uri)))
-        (progn (cache-uri uri html) html))))
-
-;; Start Hunchentoot
+      (let* ((html (get-data uri :params params)))
+        (progn (cache-uri uri (write-to-string params) html) html))))
+;
+; Start Hunchentoot
 (setf *show-lisp-errors-p* t)
 (setf *acceptor* (make-instance 'hunchentoot:easy-acceptor
                                 :port 5000
@@ -41,9 +42,18 @@
   (start *acceptor*)
   (format t "Server started at 5000"))
 
-(defun local-uri-transfer(uri)
-  (let* ((uri-obj (puri:parse-uri uri))
-         (uri-host (string-downcase (puri:uri-host uri-obj))))
+(defun assemble-params(params)
+  (let* ((result))
+    (dolist (x (decode-json-from-string params))
+      (let* ((key (car (cl-ppcre:split " as " x)))
+             (val (cadr (cl-ppcre:split " as " x))))
+        (push (cons key val) result)))
+    result))
+
+(defun filt-uri(uri)
+  (let* ((uri-host
+          (string-downcase
+           (cl-ppcre:regex-replace-all "http(s)?://|/" (cl-ppcre:scan-to-strings "^http(s)?://[a-zA-Z0-9-\\.]+[/]*" uri) ""))))
     (if (or (equal "127.0.0.1" uri-host) (equal "localhost" uri-host))
         "http://www.example.com"
         uri)))
@@ -52,9 +62,11 @@
   (if (and (parameter "uri") (parameter "selector") (parameter "desires"))
       (handler-case
           (let* ((result (get-block-data
-                          (local-uri-transfer (parameter "uri"))
+                          (filt-uri (parameter "uri"))
+                          :params (assemble-params (parameter "params"))
                           :selector (parameter "selector")
-                          :desires (and (parameter "desires") (decode-json-from-string (parameter "desires"))))))
+                          :desires (and (parameter "desires") (decode-json-from-string (parameter "desires")))
+                          :html (get-cache (filt-uri (parameter "uri")) (assemble-params (parameter "params"))))))
             (cond
               ((parameter "callback")
                (progn
@@ -73,10 +85,11 @@
       "Sorry sir, you must give me the uri."
       (handler-case
           (let* ((result (get-data
-                          (local-uri-transfer (parameter "uri"))
+                          (filt-uri (parameter "uri"))
+                          :params (assemble-params (parameter "params"))
                           :selector (parameter "selector")
                           :attrs (and (parameter "attrs") (decode-json-from-string (parameter "attrs")))
-                          :html (get-cache (local-uri-transfer (parameter "uri"))))))
+                          :html (get-cache (filt-uri (parameter "uri")) (assemble-params (parameter "params"))))))
             (cond
               ((null (parameter "selector"))
                (progn
