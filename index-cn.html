@@ -24,6 +24,7 @@
           <li>uri --- 页面地址。例：<i>https://news.ycombinator.com/</i></li>
           <li>selector --- css 选择器。例：<i>a</i> or <i>tr.athing</i>，更多参见：<a href="http://www.w3school.com.cn/cssref/css_selectors.asp">CSS 选择器参考手册</a></li>
           <li>attrs --- 节点属性，应当为 JSON 格式的列表，属性可设置别名。例：<i>["text","href"]</i> 或 <i>["text as title","href as uri"]</i></li>
+          <li>params --- 请求参数，JSON列表。例： <i>["name as vito","sex as alien"]</i></li>
           <li>callback --- JSONP 回调函数。</li>
         </ul>
       </p>
@@ -31,7 +32,8 @@
       <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text","href"]</i></p>
       <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]</i></p>
       <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]&callback=myfunction</i></p>
-
+      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/user&selector=table[id=hnmain]>tr:nth-child(3)>td>table>tr&attrs=["text"]&#38;params=["id as VitoVan"]</i></p>
+      
       <p><b>******** get-block ********</b></p>
       <p>- 根据提供的 uri 获取网页 DOM 树，根据所提供的 selector 获取相应节点，再获取其中的子节点，然后再获取对应的属性，最后转化为 JSON。</p>
       <p>调用地址： <b>http://sc.vitovan.com/get-block</b></p>
