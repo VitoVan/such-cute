@@ -24,6 +24,7 @@
           <li>uri --- the uri. Example: <i>https://news.ycombinator.com/</i></li>
           <li>selector --- the css selector. Example: <i>a</i> or <i>tr.athing</i>, see <a href="http://www.w3schools.com/cssref/css_selectors.asp">CSS Selector Reference</a></li>
           <li>attrs --- the attributes you want, it should be a list in JSON format as a list, and attrubutes can has alias. Example: <i>["text","href"]</i> or <i>["text as title","href as uri"]</i></li>
+          <li>params --- the parameters on your request, JSON list. Example: ["name as vito","sex as alien"]</li>
           <li>callback --- the JSONP callback, you know what it is.</li>
         </ul>
       </p>
@@ -31,7 +32,7 @@
       <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text","href"]</i></p>
       <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]</i></p>
       <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]&callback=myfunction</i></p>
-
+      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/user&selector=table[id=hnmain]>tr:nth-child(3)>td>table>tr&attrs=["text"]&params=["id as VitoVan"]</i></p>
       <p><b>******** get-block ********</b></p>
       <p>- Get html dom from uri, find the block nodes by selector, then find the sub nodes by your desires, and grab the data of their attributes as you want, convert them to JSON.</p>
       <p>Uri: <b>http://sc.vitovan.com/get-block</b></p>
@@ -40,6 +41,7 @@
           <li>uri --- the uri. Example: <i>https://news.ycombinator.com/</i></li>
           <li>selector --- the block css selector. Example: <i>a</i> or <i>tr.athing</i>, see <a href="http://www.w3schools.com/cssref/css_selectors.asp">CSS Selector Reference</a></li>
           <li>desires --- the sub selectors and attributes you want, one desire = one selector + some attributes, it should be a JSON list. Example: <i>[{"selector":"td.title>a","attrs":["href","text"]}]</i> or <br><i>[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]</i></li>
+          <li>params --- the parameters on your request, JSON list. Example: ["name as vito","sex as alien"]</li>
           <li>callback --- the JSONP callback, you know what it is.</li>
         </ul>
       </p>
