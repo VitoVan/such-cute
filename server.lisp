@@ -43,12 +43,13 @@
   (format t "Server started at 5000"))
 
 (defun assemble-params(params)
-  (let* ((result))
-    (dolist (x (decode-json-from-string params))
-      (let* ((key (car (cl-ppcre:split " as " x)))
-             (val (cadr (cl-ppcre:split " as " x))))
-        (push (cons key val) result)))
-    result))
+  (and params
+       (let* ((result))
+         (dolist (x (decode-json-from-string params))
+           (let* ((key (car (cl-ppcre:split " as " x)))
+                  (val (cadr (cl-ppcre:split " as " x))))
+             (push (cons key val) result)))
+         result)))
 
 (defun filt-uri(uri)
   (let* ((uri-host
