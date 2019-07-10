@@ -31,9 +31,9 @@ Since it returns JSON sometime, you may like to open your Developer Panel of you
 
 ![](https://raw.githubusercontent.com/VitoVan/such-cute/master/screenshots/json.png)
 
-## Usage && Demo
+## More Docs
 
-Check [http://vitovan.github.io/such-cute/](http://vitovan.github.io/such-cute/)
+Check [https://vitovan.github.io/such-cute/](http://vitovan.github.io/such-cute/)
 
 ## Another thing
 
