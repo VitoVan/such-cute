@@ -18,7 +18,7 @@
       <h2>用法：</h2>
       <p><b>******** get ********</b></p>
       <p>- 根据提供的 uri 获取网页 DOM 树，根据所提供的 selector 获取相应节点，然后再获取对应的属性，最后转化为 JSON。</p>
-      <p>调用地址： <b>http://sc.vitovan.com/get</b></p>
+      <p>调用地址： <b>http://localhost:5000/get</b></p>
       <p>参数：
         <ul>
           <li>uri --- 页面地址。例：<i>https://news.ycombinator.com/</i></li>
@@ -29,14 +29,14 @@
         </ul>
       </p>
       <p>例：</p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text","href"]</i></p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]</i></p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]&callback=myfunction</i></p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/user&selector=table[id=hnmain]>tr:nth-child(3)>td>table>tr&attrs=["text"]&#38;params=["id as VitoVan"]</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text","href"]</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]&callback=myfunction</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/user&selector=table[id=hnmain]>tr:nth-child(3)>td>table>tr&attrs=["text"]&#38;params=["id as VitoVan"]</i></p>
       
       <p><b>******** get-block ********</b></p>
       <p>- 根据提供的 uri 获取网页 DOM 树，根据所提供的 selector 获取相应节点，再获取其中的子节点，然后再获取对应的属性，最后转化为 JSON。</p>
-      <p>调用地址： <b>http://sc.vitovan.com/get-block</b></p>
+      <p>调用地址： <b>http://localhost:5000/get-block</b></p>
       <p>参数：
         <ul>
           <li>uri --- 页面地址。例：<i>https://news.ycombinator.com/</i></li>
@@ -46,11 +46,11 @@
         </ul>
       </p>
       <p>例：</p>
-      <p><i>http://sc.vitovan.com/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]</i></p>
-      <p><i>http://sc.vitovan.com/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]&callback=myfunction</i></p>
+      <p><i>http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]</i></p>
+      <p><i>http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]&callback=myfunction</i></p>
       <hr>
       <p>* 每个请求页面有两分钟的缓存</p>
-      <p>* sc.vitovan.com 是测试服务器，无法保证其稳定性，请勿在生产中使用。</p>
+      <p>* localhost:5000 是测试服务器，无法保证其稳定性，请勿在生产中使用。</p>
     </div>
   </body>
 </html>

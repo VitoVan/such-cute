@@ -18,7 +18,7 @@
       <h2>Usage:</h2>
       <p><b>******** get ********</b></p>
       <p>- Get html dom from uri, find the nodes by selector, grab the data of attributes you want, convert them to JSON.</p>
-      <p>Uri: <b>http://sc.vitovan.com/get</b></p>
+      <p>Uri: <b>http://localhost:5000/get</b></p>
       <p>Params:
         <ul>
           <li>uri --- the uri. Example: <i>https://news.ycombinator.com/</i></li>
@@ -29,14 +29,14 @@
         </ul>
       </p>
       <p>Example:</p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text","href"]</i></p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]</i></p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]&callback=myfunction</i></p>
-      <p><i>http://sc.vitovan.com/get?uri=https://news.ycombinator.com/user&selector=table[id=hnmain]>tr:nth-child(3)>td>table>tr&attrs=["text"]&#38;params=["id as VitoVan"]</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text","href"]</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["text as title","href as uri"]&callback=myfunction</i></p>
+      <p><i>http://localhost:5000/get?uri=https://news.ycombinator.com/user&selector=table[id=hnmain]>tr:nth-child(3)>td>table>tr&attrs=["text"]&#38;params=["id as VitoVan"]</i></p>
       
       <p><b>******** get-block ********</b></p>
       <p>- Get html dom from uri, find the block nodes by selector, then find the sub nodes by your desires, and grab the data of their attributes as you want, convert them to JSON.</p>
-      <p>Uri: <b>http://sc.vitovan.com/get-block</b></p>
+      <p>Uri: <b>http://localhost:5000/get-block</b></p>
       <p>Params:
         <ul>
           <li>uri --- the uri. Example: <i>https://news.ycombinator.com/</i></li>
@@ -47,11 +47,11 @@
         </ul>
       </p>
       <p>Example:</p>
-      <p><i>http://sc.vitovan.com/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]</i></p>
-      <p><i>http://sc.vitovan.com/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]&callback=myfunction</i></p>
+      <p><i>http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]</i></p>
+      <p><i>http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]&callback=myfunction</i></p>
       <hr>
       <p>* 2 minutes cache on each uri</p>
-      <p>* sc.vitovan.com is just a demo for testing usage, please set up your own server in production</p>
+      <p>* localhost:5000 is just a demo for testing usage, please set up your own server in production</p>
     </div>
   </body>
 </html>
