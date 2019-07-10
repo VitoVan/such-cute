@@ -26,7 +26,7 @@
                                    (kv "uri" uri)
                                    (kv "params" (write-to-string params))
                                    ($>= "time" (- (get-universal-time) cache-delay)))))))
-      (let* ((html (get-data uri :params params)))
+      (let* ((html (html-select uri :params params)))
         (progn (cache-uri uri (write-to-string params) html) html))))
 ;
 ; Start Hunchentoot
@@ -62,7 +62,7 @@
 (defun controller-get-block()
   (if (and (parameter "uri") (parameter "selector") (parameter "desires"))
       (handler-case
-          (let* ((result (get-block-data
+          (let* ((result (html-block-select
                           (filt-uri (parameter "uri"))
                           :params (assemble-params (parameter "params"))
                           :selector (parameter "selector")
@@ -85,7 +85,7 @@
   (if (null (parameter "uri"))
       "Sorry sir, you must give me the uri."
       (handler-case
-          (let* ((result (get-data
+          (let* ((result (html-select
                           (filt-uri (parameter "uri"))
                           :params (assemble-params (parameter "params"))
                           :selector (parameter "selector")
