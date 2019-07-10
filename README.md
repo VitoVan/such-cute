@@ -23,9 +23,9 @@ sbcl --load server.lisp
 
 [http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"]](http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"])
 
-[http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href as uri","text as title"]](http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href as uri","text as title"])
+[http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href as uri","text as title"]](http://localhost:5000/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href%20as%20uri","text%20as%20title"])
 
-[http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]](http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}])
+[http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text as rank"]},{"selector":"td.title>a","attrs":["href as uri","text as title"]},{"selector":"span.sitebit.comhead","attrs":["text as site"]}]](http://localhost:5000/get-block?uri=https://news.ycombinator.com/&selector=tr.athing&desires=[{"selector":"span.rank","attrs":["text%20as%20rank"]},{"selector":"td.title>a","attrs":["href%20as%20uri","text%20as%20title"]},{"selector":"span.sitebit.comhead","attrs":["text%20as%20site"]}])
 
 Since it returns JSON sometime, you may like to open your Developer Panel of your browser.
 
